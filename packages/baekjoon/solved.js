@@ -20,6 +20,7 @@ module.exports = (bot) => {
         user: async (user) => {
             const data = JSON.parse(await rp(`https://api.solved.ac/user_information.php?id=${user}`))
             return {
+                user: data.user_id,
                 tier: (data.level == 0) ? 'Unranked' : prefix[Math.floor((data.level-1)/5)] + ' ' + number[(data.level-1) % 5],
                 level: data.level,
                 rawXp: data.exp,

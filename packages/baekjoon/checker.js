@@ -56,9 +56,9 @@ const checker = (bot, gid) => {
         },
         // 레벨업 체커
         levelup: async () => {
-            for (user in guild.users) {
-                const alias = guild.users[user]
-                solvedAPI.user(user).then(userdata => {
+            for (username in guild.users) {
+                solvedAPI.user(username).then(userdata => {
+                    const user = userdata.user
                     if (guild.level[user] == null) {
                         guild.level[user] = userdata.level
                     } else if (userdata.level > guild.level[user]) {
