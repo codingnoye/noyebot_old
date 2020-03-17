@@ -1,19 +1,19 @@
-// command 모듈들
-const commands = [
-    require('./cmd/magic.js')
+const randint = (min, max) => 
+    Math.floor(Math.random() * (max-min)) + min
+
+const content = [
+    "언젠가는.","그럼.","그래.","아마도.","물론.",
+    "아니","안 돼.","안 돼.","그것도 안 돼.","아닐걸.",
+    "다시 물어봐.","가만히 있어."
 ]
 
-// 실제 명령어들이 들어가는 객체
-const cmds = {}
-for (cmd of commands) {
-    cmds[cmd.keyword] = cmd.func
-}
+const magic = (msg) => 
+    msg.channel.send("마법의 소라고동: "+content[randint(0, content.length)], {file: 'https://i.imgur.com/KwefLw8.jpg'})
 
 // 패키지 구현
 const package = (bot) => {
     return {
         name: `마법의 소라고동`,
-        desc: `무엇이든 물어보세요`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},
@@ -23,37 +23,28 @@ const package = (bot) => {
 
         // 서버에 메시지가 왔을 때 호출
         onMsg (msg) {
-            if (msg.content.startsWith('마법의 소라고동님 ')) {
-                cmds['magic'](bot, msg, '')
-            }
+            if (msg.content.startsWith('마법의 소라고동님 '))
+                magic(msg)
         },
 
         // 명령어가 호출되었을 때 호출
         onCmd (msg, keyword, param) {
-            if (cmds.hasOwnProperty(keyword)) {
-                cmds[keyword](bot, msg, param)
+            if (keyword == 'magic') {
+                magic(msg)
                 return true
             }
             return false
         },
 
-        // 다른 패키지에서 접근할 수 있는 객체, 자유로운 이름으로 작성 가능
-        api: {},
-
         // 도움말
         help (msg) {
-            const pre = bot.setting[msg.guild.id].prefix
+            const prefix = bot.setting[msg.guild.id].prefix
 
             const embed = new bot.Discord.RichEmbed()
             .setTitle(`마법의 소라고동`)
             .setColor(0x428BCA)
-            .setDescription(`무엇이든 물어보세요.`)
-
-            for (cmd of commands)
-                if (cmd.args)
-                    embed.addField(`${pre}${cmd.keyword} ${cmd.args.split(' ').map(x=>'<'+x+'>').join(' ')}`, cmd.help)
-                else 
-                    embed.addField(`${pre}${cmd.keyword}`, cmd.help)
+            .setDescription(`마법의 소라고동님은 모든 것을 알고 계십니다.`)
+            .addField(`${prefix}magic <question>`, '답을 알려줍니다. \'마법의 소라고동님 <질문>\'으로도 가능합니다.')
             
             msg.channel.send({embed})
         }
