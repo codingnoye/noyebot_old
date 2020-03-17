@@ -1,8 +1,8 @@
 module.exports = {
     func : (bot, msg, param)=>{
-        bot.packages['기본'].help(msg)
+        bot.packages['default'].help(msg)
         for (packageName in bot.packages) {
-            if (packageName == '기본') continue
+            if (packageName == 'default') continue
             const package = bot.packages[packageName]
             package.help(msg)
         }

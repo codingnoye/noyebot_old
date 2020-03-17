@@ -1,9 +1,12 @@
 const checker = require('./checker.js')
+const solved = require('./solved.js')
 
 // command 모듈들
 const commands = [
+    require('./cmd/bj.js'),
     require('./cmd/bjinit.js'),
-    require('./cmd/bjadd.js')
+    require('./cmd/bjadd.js'),
+    require('./cmd/bjusers.js')
 ]
 
 // 실제 명령어들이 들어가는 객체
@@ -15,8 +18,7 @@ for (cmd of commands) {
 // 패키지 구현
 const package = (bot) => {
     return {
-        name: `백준`,
-        desc: `백준 문제를 풀면 알려줍니다.`,
+        name: `baekjoon`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},
@@ -45,6 +47,7 @@ const package = (bot) => {
 
         // 다른 패키지에서 접근할 수 있는 객체, 자유로운 이름으로 작성 가능
         guild: {},
+        solved: solved(bot),
 
         // 도움말
         help (msg) {

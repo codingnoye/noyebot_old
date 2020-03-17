@@ -17,8 +17,7 @@ for (cmd of commands) {
 // 패키지 구현
 const package = (bot) => {
     return {
-        name: `기본`,
-        desc: `${bot.config.botname}의 기본 기능입니다.`,
+        name: `default`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},

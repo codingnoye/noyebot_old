@@ -13,7 +13,7 @@ const magic = (msg) =>
 // 패키지 구현
 const package = (bot) => {
     return {
-        name: `마법의 소라고동`,
+        name: `magicconch`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},
