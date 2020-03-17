@@ -12,7 +12,6 @@ bot.config = config
 bot.debug = debug
 bot.Discord = Discord
 bot.client = client
-bot.context = {}
 bot.store = store
 
 client.on("ready", () => {debug.log("서버 시작", debug.level.imp)})
