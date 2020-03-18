@@ -1,25 +1,11 @@
-const rp = require("request-promise-native");
-const cheerio = require("cheerio")
+const commands = [
+    require("./cmd/korea.js"),
+    require("./cmd/global.js")
+]
 
-const corona = (bot, msg) => {
-    rp.get({url: "http://coronamap.site/"}, function(err, response, body) {
-        const $ = cheerio.load(body)
-        const state = {
-            confirm : $(".confirm").next().text().trim(),
-            cure : $(".cure").next().text().trim(),
-            death : $(".death").next().text().trim()
-        }
-        
-        const embed = new bot.Discord.RichEmbed()
-        .setTitle("실시간 코로나 상황")
-        .setColor(0xff0000)
-        .setDescription("전국 상태별 인원수")
-        .addField("확진", `${state.confirm}`)
-        .addField("완치", `${state.cure}`)
-        .addField("사망", `${state.death}`)
-
-        msg.channel.send({embed})
-    })
+const cmds = {}
+for (cmd of commands) {
+    cmds[cmd.keyword] = cmd.func
 }
 
 const package = (bot) => {
@@ -34,7 +20,13 @@ const package = (bot) => {
         // 명령어가 호출되었을 때 호출
         onCmd (msg, keyword, param) {
             if (keyword == "코로나") {
-                corona(bot, msg)
+                if (cmds.hasOwnProperty(param)) {
+                    cmds[param](bot, msg)
+                } else if (!param.length) {
+                    msg.channel.send("인자를 입력하세요.")
+                } else {
+                    msg.channel.send("인자가 올바르지 않습니다.")
+                }
                 return true
             }
             return false // true를 반환하면 이 패키지에서 명령어를 인식했다는 의미
@@ -46,8 +38,9 @@ const package = (bot) => {
             const embed = new bot.Discord.RichEmbed()
             .setTitle(`실시간 코로나 현황`)
             .setColor(0x428BCA)
-            .setDescription(`현재 코로나-19 확산에 따른 실시간 상태별 인원수 알리미입니다.`)
-            .addField(`${prefix}코로나`, '상태별 인원을 확인합니다.')
+            .setDescription(`현재 코로나-19 확산에 따른 실시간 상황 알리미입니다.`)
+            .addField(`${prefix}코로나 국내`, "국내 코로나-19 상황을 알려줍니다.")
+            .addField(`${prefix}코로나 국외`, "국외 코로나-19 상황을 알려줍니다.")
             .setFooter("출처 : http://coronamap.site/")
             
             msg.channel.send({embed})
