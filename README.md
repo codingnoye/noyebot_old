@@ -5,6 +5,7 @@ Noyebot
 준비물: `node`, `npm`
 * `git clone https://github.com/codingnoye/noyebot`으로 봇을 가져온다.
 * `cd noyebot`으로 디렉토리에 들어간다.
+* (우분투 기준) `sudo apt install ffmpeg`로 ffmpeg를 설치한다.
 * `npm install`로 node 의존성을 설치한다. 
 * [디코 개발자 포탈](https://discordapp.com/developers/applications/)로 가서 봇을 만들고 토큰을 가져와 `config.js`에 넣는다.
 * 봇을 디스코드 서버에 초대한다.
@@ -31,6 +32,8 @@ module.exports = (bot) => {
         onCmd (msg, keyword, param) {
             return false // true를 반환하면 이 패키지에서 명령어를 인식했다는 의미
         },
+        // 봇이 종료될 때 호출
+        async onQuit () {},
         // help 명령어 사용 시 호출
         help (msg) {}
     }

@@ -28,7 +28,7 @@ const package = (bot) => {
             const check = checker(bot, gid)
             this.guild[gid] = bot.store.load(`baekjoon/${gid}`)
             if (this.guild[gid].hasOwnProperty('target')) {
-                setInterval(check.problem, 10000)
+                setInterval(check.problem, 15000)
                 setInterval(check.levelup, 15000)
             }   
         },
@@ -44,6 +44,9 @@ const package = (bot) => {
             }
             return false
         },
+
+        // 봇 종료 시 호출. 비동기 함수이고 모든 패키지에서 시행될 때까지 기다림.
+        async onQuit () {},
 
         // 다른 패키지에서 접근할 수 있는 객체, 자유로운 이름으로 작성 가능
         guild: {},

@@ -13,10 +13,13 @@ const package = (bot) => {
         name: 'corona',
         // 패키지가 로드될 때 호출
         onLoad () {},
+        
         // 새로운 서버가 인식될 때 호출
         onGuildLoad (msg, gid) {},
+
         // 서버에 메시지가 왔을 때 호출
         onMsg (msg) {},
+
         // 명령어가 호출되었을 때 호출
         onCmd (msg, keyword, param) {
             if (keyword == "코로나") {
@@ -31,6 +34,10 @@ const package = (bot) => {
             }
             return false // true를 반환하면 이 패키지에서 명령어를 인식했다는 의미
         },
+
+        // 봇 종료 시 호출. 비동기 함수이고 모든 패키지에서 시행될 때까지 기다림.
+        async onQuit () {},
+
         // help 명령어 사용 시 호출
         help (msg) {
             const prefix = bot.setting[msg.guild.id].prefix

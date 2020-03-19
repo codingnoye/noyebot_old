@@ -36,6 +36,9 @@ const package = (bot) => {
             return false
         },
 
+        // 봇 종료 시 호출. 비동기 함수이고 모든 패키지에서 시행될 때까지 기다림.
+        async onQuit () {},
+
         // 도움말
         help (msg) {
             const prefix = bot.setting[msg.guild.id].prefix
