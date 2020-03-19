@@ -57,20 +57,27 @@ const main = function (bot) {
             }
         }
     })
+
+    // 종료 시 작업
+    process.on('SIGINT', function() {
+        debug.log('')
+        debug.log("종료 작업 중...", debug.level.imp)
+        const promArr = []
+        for (let packageName in bot.packages) {
+            const package = bot.packages[packageName]
+            promArr.push(package.onQuit())
+        }
+        Promise.all(promArr).then(() => {
+        debug.log("종료 전 모든 작업 완료", debug.level.imp)
+        process.exit()
+        })
+    })
+
+    // 임시 에러 로거
+    process.on('unhandledRejection', (reason, p) => {
+        console.log('Promise 에러: ', p);
+        console.log(reason)
+    });
+
 }
 module.exports = main
-
-/*
-process.on('SIGINT', function() { // 종료시 barrel 데이터들을 저장
-    debug.log('')
-    debug.log("종료 감지", debug.level.imp)
-    const promArr = []
-    Object.keys(bot.guilds).map(function(key, index) {
-        promArr.push(bot.guilds[key].save())
-    })
-    Promise.all(promArr).then(() => {
-      debug.log("종료 전 모든 저장 완료", debug.level.imp)
-      process.exit()
-    })
-  })
-*/

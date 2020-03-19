@@ -13,7 +13,7 @@ module.exports = {
             guild.lastcheck = -1
             bot.store.save(`baekjoon/${gid}`)
             const check = checker(bot, gid)
-            setInterval(check.problem, 10000)
+            setInterval(check.problem, 15000)
             setInterval(check.levelup, 15000)
         } else {
             msg.channel.send('대상 단체 id를 입력해 주세요.')
