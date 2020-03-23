@@ -10,12 +10,17 @@ for (cmd of commands) {
 
 const package = (bot) => {
     return {
-        name: 'corona',
+        name: '코로나',
+        desc: `코로나 정보를 알려줍니다.`,
+        
         // 패키지가 로드될 때 호출
         onLoad () {},
         
         // 새로운 서버가 인식될 때 호출
         onGuildLoad (msg, gid) {},
+
+        // 서버에서 비활성화 될 때 호출
+        onGuildQuit (gid) {},
 
         // 서버에 메시지가 왔을 때 호출
         onMsg (msg) {},

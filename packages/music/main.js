@@ -7,7 +7,8 @@ const package = (bot) => {
         cmds[commands[cmd].keyword] = commands[cmd].func
     }
     return {
-        name: `music`,
+        name: `음악`,
+        desc: `음악을 들려줍니다.`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},
@@ -25,6 +26,9 @@ const package = (bot) => {
                 }
             }
         },
+
+        // 서버에서 비활성화 될 때 호출
+        onGuildQuit (gid) {},
 
         // 서버에 메시지가 왔을 때 호출
         onMsg (msg) {},

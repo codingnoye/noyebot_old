@@ -13,13 +13,17 @@ const magic = (msg) =>
 // 패키지 구현
 const package = (bot) => {
     return {
-        name: `magicconch`,
+        name: `소라고동`,
+        desc: `마법의 소라고동님은 모든 것을 알고 계십니다.`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},
 
         // 새로운 서버가 인식될 때 호출
         onGuildLoad (msg, gid) {},
+
+        // 서버에서 비활성화 될 때 호출
+        onGuildQuit (gid) {},
 
         // 서버에 메시지가 왔을 때 호출
         onMsg (msg) {

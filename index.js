@@ -11,10 +11,11 @@ bot.packages = {}
 bot.config = config
 bot.debug = debug
 bot.Discord = Discord
-bot.client = client
 bot.store = store
 
-client.on("ready", () => {debug.log("서버 시작", debug.level.imp)})
+client.on("ready", () => {
+    debug.log("서버 시작", debug.level.imp)
+    bot.client = client
+    main(bot)
+})
 client.login(config.token)
-
-main(bot)
