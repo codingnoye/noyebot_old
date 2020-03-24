@@ -1,14 +1,14 @@
 const ytdl = require('ytdl-core')
 module.exports = (bot, youtube) => {
     const sing = async (gid, channel) => {
-        const music = bot.packages.music
+        const music = bot.packages['음악']
         const guild = music.guilds[gid]
         if (!guild.connection)
             guild.connection = await channel.join()
         guild.control = guild.connection.playStream(ytdl(guild.queue[0].url, { quality: 'highestaudio', filter: 'audioonly' }))
     }
     const join = async (bot, msg, gid) => {
-        const music = bot.packages['music']
+        const music = bot.packages['음악']
         const guild = music.guilds[gid]
         if (!guild.channel) {
             if (msg.member.voiceChannel) {
@@ -31,7 +31,7 @@ module.exports = (bot, youtube) => {
         }
     }
     const play = async (gid) => {
-        const music = bot.packages['music']
+        const music = bot.packages['음악']
         const guild = music.guilds[gid]
         guild.playing = true
         await sing(gid, guild.channel)
@@ -53,7 +53,7 @@ module.exports = (bot, youtube) => {
     return {
         듣기: {
             func : async (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
 
@@ -74,7 +74,7 @@ module.exports = (bot, youtube) => {
         },
         먼저듣기: {
             func : async (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
 
@@ -94,7 +94,7 @@ module.exports = (bot, youtube) => {
         },
         재생: {
             func : (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
                 if (guild.playing) {
@@ -111,7 +111,7 @@ module.exports = (bot, youtube) => {
         },
         일시정지: {
             func : (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
                 if (!guild.playing) {
@@ -126,7 +126,7 @@ module.exports = (bot, youtube) => {
         },
         중지: {
             func : (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
                 guild.queue.length = 0
@@ -141,7 +141,7 @@ module.exports = (bot, youtube) => {
         },
         재생목록: {
             func : (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
 
@@ -162,7 +162,7 @@ module.exports = (bot, youtube) => {
         },
         다음곡: {
             func : (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
                 guild.control.end()
@@ -172,7 +172,7 @@ module.exports = (bot, youtube) => {
         },
         볼륨: {
             func : (msg, param) => {
-                const music = bot.packages['music']
+                const music = bot.packages['음악']
                 const gid = msg.guild.id
                 const guild = music.guilds[gid]
                 guild.volume = parseInt(param)/100

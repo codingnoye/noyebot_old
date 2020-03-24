@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 // command 모듈들
 const commands = [
     require('./cmd/help'),
@@ -5,7 +7,8 @@ const commands = [
     require('./cmd/prefix.js'),
     require('./cmd/say.js'),
     require('./cmd/set.js'),
-    require('./cmd/setting.js')
+    require('./cmd/setting.js'),
+    require('./cmd/pkg.js')
 ]
 
 // 실제 명령어들이 들어가는 객체
@@ -17,22 +20,27 @@ for (cmd of commands) {
 // 패키지 구현
 const package = (bot) => {
     return {
-        name: `default`,
+        name: `기본`,
+        desc: `${bot.config.botname} 기본 기능`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},
 
         // 새로운 서버가 인식될 때 호출
-        onGuildLoad (msg, gid) {
-            // prefix가 없으면 기본값인 !로 지정
-            if (!bot.setting[gid].hasOwnProperty('prefix')) {
-                bot.setting[gid].prefix = '!'
-                bot.store.save(`guilds/${gid}`)
-            }
+        onGuildLoad (msg, gid) {},
+        
+        // 서버에서 비활성화 될 때 호출
+        onGuildQuit (gid) {
+            clearInterval(control[gid].problem)
+            clearInterval(control[gid].levelup)
         },
 
         // 서버에 메시지가 왔을 때 호출
-        onMsg (msg) {},
+        onMsg (msg) {
+            if (msg.content == `${bot.config.defaultPrefix}help`) {
+                cmds['help'](bot, msg, '')
+            }
+        },
 
         // 명령어가 호출되었을 때 호출
         onCmd (msg, keyword, param) {

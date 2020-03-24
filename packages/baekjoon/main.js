@@ -15,22 +15,33 @@ for (cmd of commands) {
     cmds[cmd.keyword] = cmd.func
 }
 
+const control = {}
+
 // 패키지 구현
 const package = (bot) => {
     return {
-        name: `baekjoon`,
+        name: `백준`,
+        desc: `백준 문제를 풀면 알려줍니다.`,
 
         // 패키지가 로드될 때 호출
         onLoad () {},
 
-        // 새로운 서버가 인식될 때 호출
+        // 새로운 서버가 인식되거나 활성화될 때 호출
         onGuildLoad (msg, gid) {
             const check = checker(bot, gid)
             this.guild[gid] = bot.store.load(`baekjoon/${gid}`)
             if (this.guild[gid].hasOwnProperty('target')) {
-                setInterval(check.problem, 15000)
-                setInterval(check.levelup, 15000)
+                control[gid] = {
+                    problem: setInterval(check.problem, 15000),
+                    levelup: setInterval(check.levelup, 15000)
+                }
             }   
+        },
+
+        // 서버에서 비활성화 될 때 호출
+        onGuildQuit (gid) {
+            clearInterval(control[gid].problem)
+            clearInterval(control[gid].levelup)
         },
 
         // 서버에 메시지가 왔을 때 호출

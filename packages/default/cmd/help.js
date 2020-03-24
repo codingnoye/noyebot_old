@@ -1,8 +1,7 @@
 module.exports = {
     func : (bot, msg, param)=>{
-        bot.packages['default'].help(msg)
-        for (packageName in bot.packages) {
-            if (packageName == 'default') continue
+        const gid = msg.guild.id
+        for (const packageName of bot.setting[gid].enabled) {
             const package = bot.packages[packageName]
             package.help(msg)
         }

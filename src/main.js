@@ -8,23 +8,33 @@ const main = function (bot) {
 
     // 패키지 로드
     const allUrl = fs.readdirSync('packages/')
-    for (url of allUrl) {
-        const package = require('../packages/' + url + '/main.js')(bot)
-        package.onLoad()
-        bot.packages[package.name] = package
-    }
+        for (url of allUrl) {
+            const package = require('../packages/' + url + '/main.js')(bot)
+            package.onLoad()
+            bot.packages[package.name] = package
+        }
 
     // on msessage 이벤트
     client.on("message", async msg => {
         if (!msg.author.bot) {
             if (msg.guild != null){
                 const gid = msg.guild.id
-                debug.log(`msg : ${msg.content}`)
 
                 // 서버 인식
-                if ((typeof bot.setting[gid]) == 'undefined') { // 로드되지 않은 서버라면 로드(barrel의 형태로)
+                if ((typeof bot.setting[gid]) == 'undefined') { // 로드되지 않은 서버라면 로드
                     bot.setting[gid] = bot.store.load(`guilds/${gid}`)
-                    for (packageName in bot.packages) {
+                    // prefix가 없으면 기본값으로 지정
+                    if (!bot.setting[gid].hasOwnProperty('prefix')) {
+                        bot.setting[gid].prefix = bot.config.defaultPrefix
+                        bot.store.save(`guilds/${gid}`)
+                    }
+                    // enabled가 없으면 기본값으로 지정
+                    if (!bot.setting[gid].hasOwnProperty('enabled')) {
+                        bot.setting[gid].enabled = bot.config.defaultEnabled.slice()
+                        bot.store.save(`guilds/${gid}`)
+                    }
+                    // 적용된 패키지들로 보냄
+                    for (const packageName of bot.setting[gid].enabled) {
                         bot.packages[packageName].onGuildLoad(msg, msg.guild.id)
                     }
                 }
@@ -37,7 +47,7 @@ const main = function (bot) {
                     const keyword = parts[0]
                     const param = parts.slice(1).join(" ")
                     let worked = false
-                    for (packageName in bot.packages) {
+                    for (const packageName of bot.setting[gid].enabled) {
                         if (bot.packages[packageName].onCmd(msg, keyword, param) == true)
                             worked = true
                     }
@@ -45,7 +55,7 @@ const main = function (bot) {
                         msg.channel.send(`'${keyword} ${param}'을(를) 이해할 수 없습니다.`)
                 } else {
                     // 일반 메시지
-                    for (packageName in bot.packages) {
+                    for (const packageName of bot.setting[gid].enabled) {
                         bot.packages[packageName].onMsg(msg)
                     }
                 }
@@ -69,6 +79,7 @@ const main = function (bot) {
         }
         Promise.all(promArr).then(() => {
         debug.log("종료 전 모든 작업 완료", debug.level.imp)
+        bot.client.destroy()
         process.exit()
         })
     })
@@ -77,7 +88,14 @@ const main = function (bot) {
     process.on('unhandledRejection', (reason, p) => {
         console.log('Promise 에러: ', p);
         console.log(reason)
-    });
+    })
 
+    bot.client.user.setStatus('online')
+    bot.client.user.setPresence({
+        game: {
+            name: `${bot.config.defaultPrefix}help　 　 　 　 　 　 　 　 　 　 .`,
+            type: "Playing"
+        }
+    });
 }
 module.exports = main
