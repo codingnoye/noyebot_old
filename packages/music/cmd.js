@@ -151,7 +151,7 @@ module.exports = (bot, youtube) => {
                 .setDescription(`'${bot.setting[gid].prefix}다음곡'으로 곡을 넘길 수 있어요.`)
 
                 let i = 0
-                for (song of guild.queue) {
+                for (const song of guild.queue) {
                     embed.addField(`by ${song.channel}`, `🎵 ${(i==0)?'[현재 곡]':`[ ${i} ]`} ${song.title}`)
                     i += 1
                 }

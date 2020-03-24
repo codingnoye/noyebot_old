@@ -4,7 +4,7 @@ const commands = [
 ]
 
 const cmds = {}
-for (cmd of commands) {
+for (const cmd of commands) {
     cmds[cmd.keyword] = cmd.func
 }
 
