@@ -11,7 +11,7 @@ const korea = (bot, msg) => {
             status[$(ele).children(".tit").text().trim()] = $(ele).children(".num").text().trim()
         })
 
-        $("button").each((i, ele) => {
+        $("#main_maplayout button").each((i, ele) => {
             regions[$(ele).children(".name").text().trim()] = $(ele).children(".num").text().trim()
         })
         
