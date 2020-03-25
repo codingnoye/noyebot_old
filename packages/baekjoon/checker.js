@@ -25,7 +25,7 @@ const checker = (bot, gid) => {
                 solutions.push(solution)
             })
             // 문제 알림
-            for (solution of solutions.filter(solution => solution.id > guild.lastcheck)) {
+            for (const solution of solutions.filter(solution => solution.id > guild.lastcheck)) {
                 guild.lastcheck = (guild.lastcheck<solution.id)?solution.id:guild.lastcheck
                 if (guild.users.hasOwnProperty(solution.user)) {
                     const user = solution.user
@@ -56,7 +56,7 @@ const checker = (bot, gid) => {
         },
         // 레벨업 체커
         levelup: async () => {
-            for (username in guild.users) {
+            for (const username in guild.users) {
                 solvedAPI.user(username).then(userdata => {
                     const user = userdata.user
                     if (guild.level[user] == null) {

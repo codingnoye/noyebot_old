@@ -8,7 +8,7 @@ const main = function (bot) {
 
     // 패키지 로드
     const allUrl = fs.readdirSync('packages/')
-        for (url of allUrl) {
+        for (const url of allUrl) {
             const package = require('../packages/' + url + '/main.js')(bot)
             package.onLoad()
             bot.packages[package.name] = package

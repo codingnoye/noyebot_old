@@ -2,7 +2,7 @@ const rp = require('request-promise-native')
 const cheerio = require('cheerio')
 module.exports = {
     func : (bot, msg, param)=>{
-        const solved = bot.packages['baekjoon'].solved
+        const solved = bot.packages['백준'].solved
         const RichEmbed = bot.Discord.RichEmbed
         if (param.length) {
             (async ()=>{

@@ -3,7 +3,7 @@ const package = (bot) => {
     const youtube = require('./youtube.js')(bot)
     const commands = require('./cmd.js')(bot, youtube)
     const cmds = {}
-    for (cmd in commands) {
+    for (const cmd in commands) {
         cmds[commands[cmd].keyword] = commands[cmd].func
     }
     return {
@@ -62,7 +62,7 @@ const package = (bot) => {
             .setColor(0x428BCA)
             .setDescription(`노래를 들려드립니다.`)
 
-            for (cmd in commands)
+            for (const cmd in commands)
                 if (commands[cmd].args)
                     embed.addField(`${pre}${commands[cmd].keyword} ${commands[cmd].args.split(' ').map(x=>'<'+x+'>').join(' ')}`, commands[cmd].help)
                 else 

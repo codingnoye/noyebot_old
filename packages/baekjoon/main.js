@@ -11,7 +11,7 @@ const commands = [
 
 // 실제 명령어들이 들어가는 객체
 const cmds = {}
-for (cmd of commands) {
+for (const cmd of commands) {
     cmds[cmd.keyword] = cmd.func
 }
 
@@ -72,7 +72,7 @@ const package = (bot) => {
             .setColor(0x428BCA)
             .setDescription(`백준 패키지 도움말입니다.`)
 
-            for (cmd of commands)
+            for (const cmd of commands)
                 if (cmd.args)
                     embed.addField(`${pre}${cmd.keyword} ${cmd.args.split(' ').map(x=>'<'+x+'>').join(' ')}`, cmd.help)
                 else 
