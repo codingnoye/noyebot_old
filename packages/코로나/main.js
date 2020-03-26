@@ -54,11 +54,8 @@ const package = {
     helpSimple (msg, embed) {
         const prefix = bot.guilds[msg.guild.id].prefix
         const helps = []
-
-        for (const keyword of commands.keywords) {
-            helps.push(`\`${prefix}코로나 국내\`\n국내 코로나-19 상황을 알려줍니다.`)
-            helps.push(`\`${prefix}코로나 국외\`\n국외 코로나-19 상황을 알려줍니다.`)
-        }
+        helps.push(`\`${prefix}코로나 국내\`\n국내 코로나-19 상황을 알려줍니다.`)
+        helps.push(`\`${prefix}코로나 국외\`\n국외 코로나-19 상황을 알려줍니다.`)
             
         embed.addField(`코로나: ${this.desc}`, `${helps.join('\n')}`)
     }
