@@ -80,9 +80,11 @@ const package = {
             const channel = client.channels.get(this.guilds[gid].channel)
             const embed = new RichEmbed().setColor(0x428BCA)
             .setTitle(`레벨 업!`)
-            .addField(`**Lv. ${this.guilds[gid].lv[uid]}** -> **Lv. ${newLv}** (${(rawXP-level.xpTable[newLv-1])/(level.xpTable[newLv]-level.xpTable[newLv-1])*100}%)`, `**${channel.guild.members.get(uid).nickname}**\n${comma(rawXP)}xp / ${(comma(level.xpTable[newLv]))}xp`)
+            .addField(`**Lv. ${this.guilds[gid].lv[uid]}** -> **Lv. ${newLv}** (${Math.round((rawXP-level.xpTable[newLv-1])/(level.xpTable[newLv]-level.xpTable[newLv-1])*100)}%)`, `**${channel.guild.members.get(uid).displayName}**\n${comma(rawXP-level.xpTable[newLv-1])}xp / ${(comma(level.xpTable[newLv]-level.xpTable[newLv-1]))}xp\nTotal ${comma(rawXP)}xp`)
             channel.send(embed)
 
+            this.guilds[gid].lv[uid] = newLv
+        } else if (this.guilds[gid].lv[uid] > newLv) {
             this.guilds[gid].lv[uid] = newLv
         }
         store.save(`레벨/${gid}`)
