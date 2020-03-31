@@ -2,7 +2,6 @@ module.exports = {
     func : (msg, params)=>{
         const gid = msg.guild.id
         const guild = store.load(`백준/${gid}`)
-
         if (!guild.hasOwnProperty('target')) {
             // init이 안된 경우
             msg.channel.send(`${bot.setting[gid].prefix}bjinit을 통해 학교 등록 후 사용해주세요. 자세한 것은 도움말을 참고해주세요.`)

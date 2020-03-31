@@ -1,6 +1,6 @@
 const solved = require('./solved.js')
 const crawler = require('./crawler.js')
-const quest = require('./cmd/quest.js')
+const nquest = require('./nquest.js')
 const {RichEmbed} = require('discord.js')
 
 const levelColor = [0xa75618,0x4e608d,0xffae00,0x00ffa1,0x00afff,0xff0042]
@@ -40,24 +40,25 @@ const checker = (gid) => {
 
                     const 백준 = bot.packages.백준
                     const 레벨 = bot.packages.레벨
-                    if (bot.guilds[gid].enabled.includes('레벨') && 백준.quest.hasOwnProperty(gid)) {
-                        if (백준.quest[gid].list.includes(problem)) {
-                            if (!백준.quest[gid].cleared[problem].includes(user)) {
-                                if (!백준.quest[gid].first_cleared.includes(user)) {
-                                    console.log(`${user}가 경험치를 ${quest.table[solvedData.level]+3000}xp 얻었습니다.`)
+                    
+                    if (bot.guilds[gid].enabled.includes('레벨') && 백준.guild[gid].hasOwnProperty('quest')) {
+                        if (백준.guild[gid].quest.list.includes(problem)) {
+                            if (!백준.guild[gid].quest.cleared[problem].includes(user)) {
+                                if (!백준.guild[gid].quest.first_cleared.includes(user)) {
+                                    console.log(`${user}가 경험치를 ${nquest.table[solvedData.level]+3000}xp 얻었습니다.`)
                                     const embed = new RichEmbed().setColor(0x428BCA)
-                                    .addField('오늘의 첫 퀘스트 완료!', `${user}가 경험치를 ${quest.table[solvedData.level]}+3000 얻었습니다.`)
-                                    레벨.earnXP(gid, guild.uid[user], quest.table[solvedData.level]+3000)
-                                    백준.quest[gid].first_cleared.push(user)
+                                    .addField('오늘의 첫 퀘스트 완료!', `${user}가 경험치를 ${nquest.table[solvedData.level]}+3000 얻었습니다.`)
+                                    레벨.earnXP(gid, guild.uid[user], nquest.table[solvedData.level]+3000)
+                                    백준.guild[gid].quest.first_cleared.push(user)
                                     channel.send(embed)
                                 } else {
-                                    console.log(`${user}가 경험치를 ${quest.table[solvedData.level]}xp 얻었습니다.`)
+                                    console.log(`${user}가 경험치를 ${nquest.table[solvedData.level]}xp 얻었습니다.`)
                                     const embed = new RichEmbed().setColor(0x428BCA)
-                                    .addField('퀘스트 완료!', `${user}가 경험치를 ${quest.table[solvedData.level]} 얻었습니다.`)
-                                    레벨.earnXP(gid, guild.uid[user], quest.table[solvedData.level])
+                                    .addField('퀘스트 완료!', `${user}가 경험치를 ${nquest.table[solvedData.level]} 얻었습니다.`)
+                                    레벨.earnXP(gid, guild.uid[user], nquest.table[solvedData.level])
                                     channel.send(embed)
                                 }
-                                백준.quest[gid].cleared[problem].push(user)
+                                백준.guild[gid].quest.cleared[problem].push(user)
                             }
                         }
                     }

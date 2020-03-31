@@ -3,8 +3,9 @@ const cmds = [
     require('./cmd/add.js'),
     require('./cmd/init.js'),
     require('./cmd/users.js'),
-    require('./cmd/quest.js')
+    require('./cmd/quest.js'),
 ]
+
 const keywords = []
 const func = {}
 const help = {}

@@ -1,7 +1,10 @@
 const checker = require('./checker.js')
 const commands = require('./commands.js')
-const worker = {}
+const nquest = require('./nquest.js')
 const {RichEmbed} = require('discord.js')
+const schedule = require('node-schedule')
+
+const worker = {}
 const package =  {
     desc: `백준 문제를 풀면 알려줍니다.`,
 
@@ -15,7 +18,10 @@ const package =  {
                 problem: setInterval(check.problem, 15000),
                 levelup: setInterval(check.levelup, 15000)
             }
-        }   
+        }
+        const j = schedule.scheduleJob('0 0 9 * * *', () => {
+            nquest.newQuest(gid)
+        })
     },
 
     onGuildQuit (gid) {
