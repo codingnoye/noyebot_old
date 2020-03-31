@@ -42,7 +42,7 @@ module.exports = {
         for (const user of users) {
             temp.push(`solved_by%3A${user}`)
         }
-        const query = `tier%3A${min}..${max}%20solved%3A${count}..%20!(${temp.join('%20')})`
+        const query = `tier%3A${min}..${max}%20solved%3A${count}..%20!(${temp.join('%7C')})`
         const data = await rp(`https://solved.ac/search/${query}`)
         const $ = cheerio.load(data)
         const problems = []

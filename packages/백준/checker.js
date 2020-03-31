@@ -22,7 +22,7 @@ const checker = (gid) => {
                     const channel = client.channels.get(guild.channel)
 
                     const embed = new RichEmbed()
-                    .setTitle(`**${user}**(${channel.guild.members.get(guild.uid[user]).nickname})이 ${problem}번 문제를 풀었습니다!`)
+                    .setTitle(`**${user}**(${channel.guild.members.get(guild.uid[user]).displayName})이 ${problem}번 문제를 풀었습니다!`)
 
                     .setDescription(`${problem}번 문제 : ${name}`)
                     .addField('나도 풀러 가기', `https://www.acmicpc.net/problem/${problem}`)
@@ -76,9 +76,9 @@ const checker = (gid) => {
                         // 레벨업 메시지
                         const channel = client.channels.get(guild.channel)
                         const embed = new RichEmbed()
-                        .setTitle(`**${user}**(${channel.guild.members.get(guild.uid[user]).nickname})님의 승급을 축하해주세요!`)
+                        .setTitle(`**${user}**(${channel.guild.members.get(guild.uid[user]).displayName})님의 승급을 축하해주세요!`)
                         .setColor(levelColor[Math.floor((userdata.level-1)/5)])
-                        .setDescription(`**${user}**(${channel.guild.members.get(guild.uid[user]).nickname})님이 **${userdata.tier}**으로 승급하셨습니다.`)
+                        .setDescription(`**${user}**(${channel.guild.members.get(guild.uid[user]).displayName})님이 **${userdata.tier}**으로 승급하셨습니다.`)
                         .attachFile(`packages/백준/res/${userdata.level}.png`)
                         .setThumbnail(`attachment://${userdata.level}.png`)
     

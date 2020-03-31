@@ -12,11 +12,11 @@ module.exports = {
             const embed = new RichEmbed()
             .setColor(0x428BCA)
             const uid = msg.author.id
-            const nickname = msg.channel.members.get(uid).nickname
+            const name = msg.channel.members.get(uid).displayName
             const rawXP = guild.xp[uid]
             const lv = level.getLevel(rawXP)
-            embed.setTitle(`${nickname}`)
-            embed.addField(`**Lv. ${lv}** (${(rawXP-level.xpTable[lv-1])/(level.xpTable[lv]-level.xpTable[lv-1])*100}%)`, `${comma(rawXP)}xp / ${(comma(level.xpTable[lv]))}xp`)
+            embed.setTitle(`${name}`)
+            embed.addField(`**Lv. ${lv}** (${Math.round((rawXP-level.xpTable[lv-1])/(level.xpTable[lv]-level.xpTable[lv-1])*100)}%)`, `${comma(rawXP-level.xpTable[lv-1])}xp / ${(comma(level.xpTable[lv]-level.xpTable[lv-1]))}xp\nTotal ${comma(rawXP)}xp`)
             
             msg.channel.send({embed})
         }

@@ -38,7 +38,7 @@ module.exports = {
                 embed.addField(`**${problem.tier}**`, `**${problem.num}번 문제** ${table[problem.level]}XP\nhttps://www.acmicpc.net/problem/${problem.num}`)
             }
             embed.addField(`**추가 경험치**`, `오늘의 첫 퀘스트 클리어: 3000XP`)
-            embed.addField(`**문제 선정 조건**`, `실버 4 ~ 플레 1, 여기에 푼 사람이 없고 500명 이상 푼 문제 중 랜덤`)
+            embed.addField(`**문제 선정 조건**`, `실버 5 ~ 플레 1, 여기에 푼 사람이 없고 500명 이상 푼 문제 중 랜덤`)
             msg.channel.send({embed})
         } else {
             msg.channel.send('레벨 패키지 활성화가 필요합니다.')

@@ -21,10 +21,10 @@ module.exports = {
             const users = rawUsers.sort((a, b) => b[2] - a[2])
             for (const user of users) {
                 const uid = user[0]
-                const nickname = msg.channel.members.get(uid).nickname
+                const name = msg.channel.members.get(uid).displayName
                 const lv = user[1]
                 const rawXP = user[2]
-                embed.addField(`**Lv. ${lv}** (${(rawXP-level.xpTable[lv-1])/(level.xpTable[lv]-level.xpTable[lv-1])*100}%)`, `**${nickname}**\n${comma(rawXP)}xp / ${(comma(level.xpTable[lv]))}xp`)
+                embed.addField(`**Lv. ${lv}** (${Math.round((rawXP-level.xpTable[lv-1])/(level.xpTable[lv]-level.xpTable[lv-1])*100)}%)`, `**${name}**\n${comma(rawXP-level.xpTable[lv-1])}xp / ${(comma(level.xpTable[lv]-level.xpTable[lv-1]))}xp\nTotal ${comma(rawXP)}xp`)
             }
             msg.channel.send({embed})
         }

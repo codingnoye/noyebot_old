@@ -24,6 +24,10 @@ module.exports = {
 
             msg.channel.send({embed})
         } else {
+            if (!msg.member.hasPermission('ADMINISTRATOR')) {
+                msg.channel.send(`이 명령어는 관리자 권한이 필요합니다.`)
+                return
+            }
             switch (params[0]) {
                 case 'enable':
                     if (params.length == 1) {
