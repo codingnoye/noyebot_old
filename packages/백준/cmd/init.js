@@ -18,9 +18,7 @@ module.exports = {
             guild.level = {}
             guild.lastcheck = -1
             store.save(`백준/${gid}`)
-            const check = checker( gid)
-            setInterval(check.problem, 15000)
-            setInterval(check.levelup, 15000)
+            bot.packages.백준.onGuildLoad(gid)
         } else {
             msg.channel.send('대상 단체 id를 입력해 주세요.')
         }

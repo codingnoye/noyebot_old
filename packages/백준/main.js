@@ -1,6 +1,6 @@
 const checker = require('./checker.js')
 const commands = require('./commands.js')
-const nquest = require('./nquest.js')
+const quest = require('./cmd/quest.js')
 const {RichEmbed} = require('discord.js')
 const schedule = require('node-schedule')
 
@@ -18,10 +18,10 @@ const package =  {
                 problem: setInterval(check.problem, 15000),
                 levelup: setInterval(check.levelup, 15000)
             }
+            schedule.scheduleJob('0 0 9 * * *', () => {
+                quest.autoQuest(gid)
+            })
         }
-        const j = schedule.scheduleJob('0 0 9 * * *', () => {
-            nquest.newQuest(gid)
-        })
     },
 
     onGuildQuit (gid) {
