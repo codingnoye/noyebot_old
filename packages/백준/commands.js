@@ -5,6 +5,7 @@ const cmds = [
     require('./cmd/users.js'),
     require('./cmd/quest.js'),
     require('./cmd/newquest.js'),
+    require('./cmd/random.js'),
 ]
 
 const keywords = []
