@@ -18,10 +18,7 @@ const package =  {
                 problem: setInterval(check.problem, 15000),
                 levelup: setInterval(check.levelup, 15000)
             }
-            /* schedule.scheduleJob('0 0 9 * * *', () => {
-                quest.autoQuest(gid)
-            })*/
-            schedule.scheduleJob('0 0 15 * * *', () => {
+            schedule.scheduleJob('0 0 9 * * *', () => {
                 quest.autoQuest(gid)
             })
         }
