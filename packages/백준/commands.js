@@ -4,6 +4,7 @@ const cmds = [
     require('./cmd/init.js'),
     require('./cmd/users.js'),
     require('./cmd/quest.js'),
+    require('./cmd/newquest.js'),
 ]
 
 const keywords = []

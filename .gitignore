@@ -3,4 +3,5 @@ node_modules/
 package-lock.json
 data/*
 test*
+테스트
 *.example
