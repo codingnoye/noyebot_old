@@ -51,7 +51,7 @@ const questMessage = async function(gid, channel) {
     embed.addField(`**추가 경험치**`, `오늘의 첫 퀘스트 클리어: 3000XP`)
     embed.addField(`**문제 선정 조건**`, `실버 5 ~ 플레 1, 여기에 푼 사람이 없고 500명 이상 푼 문제 중 랜덤`)
 
-    channel.send({embed})
+    return await channel.send({embed})
 }
 
 module.exports = {
@@ -71,7 +71,8 @@ module.exports = {
         const guild = store.load(`백준/${gid}`)
         const channel = client.channels.get(guild.channel)
         await newQuest(gid)
-        await questMessage(gid, channel)
+        const sended = await questMessage(gid, channel)
+        sended.pin()
     },
     table: table,
     help : '오늘의 퀘스트 목록을 보여줍니다.'
