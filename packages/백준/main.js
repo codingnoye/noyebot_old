@@ -16,7 +16,8 @@ const package =  {
         if (this.guild[gid].hasOwnProperty('target')) {
             worker[gid] = {
                 problem: setInterval(check.problem, 15000),
-                levelup: setInterval(check.levelup, 15000)
+                levelup: setInterval(check.levelup, 15000),
+                role: setInterval(check.role, 15000)
             }
             schedule.scheduleJob('0 0 9 * * *', () => {
                 quest.autoQuest(gid)
@@ -27,6 +28,7 @@ const package =  {
     onGuildQuit (gid) {
         clearInterval(worker[gid].problem)
         clearInterval(worker[gid].levelup)
+        clearInterval(worker[gid].role)
     },
 
     onMsg (msg) {},
