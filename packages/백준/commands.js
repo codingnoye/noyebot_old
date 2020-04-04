@@ -2,6 +2,7 @@ const cmds = [
     require('./cmd/prob.js'),
     require('./cmd/add.js'),
     require('./cmd/init.js'),
+    require('./cmd/user.js'),
     require('./cmd/users.js'),
     require('./cmd/quest.js'),
     require('./cmd/newquest.js'),
