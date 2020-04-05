@@ -23,7 +23,6 @@ const checker = (gid) => {
 
                     const embed = new RichEmbed()
                     .setTitle(`**${user}**(${channel.guild.members.get(guild.uid[user]).displayName})이 ${problem}번 문제를 풀었습니다!`)
-
                     .setDescription(`${problem}번 문제 : ${name}`)
                     .addField('나도 풀러 가기', `https://www.acmicpc.net/problem/${problem}`)
                     .addField('Solved.ac', '**' + solvedData.tier + '**')
@@ -91,7 +90,7 @@ const checker = (gid) => {
                     }
                 })
             }
-        }
+        },
     }
 }
 
