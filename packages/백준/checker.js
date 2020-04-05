@@ -26,15 +26,9 @@ const checker = (gid) => {
                     .setDescription(`${problem}번 문제 : ${name}`)
                     .addField('나도 풀러 가기', `https://www.acmicpc.net/problem/${problem}`)
                     .addField('Solved.ac', '**' + solvedData.tier + '**')
-                    if (solvedData.kudeki_level > 0) {
-                        embed.attachFile(`packages/백준/res/k${solvedData.kudeki_level}.png`)
-                        .setThumbnail(`attachment://k${solvedData.kudeki_level}.png`)
-                        .setColor(solved.kcolor)
-                    } else {
-                        embed.attachFile(`packages/백준/res/${solvedData.level}.png`)
-                        .setThumbnail(`attachment://${solvedData.level}.png`)
-                        .setColor(solved.color[Math.floor((solvedData.level-1)/5)])
-                    }
+                    embed.attachFile(`packages/백준/res/${solvedData.level}.png`)
+                    .setThumbnail(`attachment://${solvedData.level}.png`)
+                    .setColor(solved.color[Math.floor((solvedData.level-1)/5)])
                     channel.send(embed)
 
                     const 백준 = bot.packages.백준
@@ -44,14 +38,12 @@ const checker = (gid) => {
                         if (백준.guild[gid].quest.list.includes(problem)) {
                             if (!백준.guild[gid].quest.cleared[problem].includes(user)) {
                                 if (!백준.guild[gid].quest.first_cleared.includes(user)) {
-                                    console.log(`${user}가 경험치를 ${quest.table[solvedData.level]+3000}xp 얻었습니다.`)
                                     const embed = new RichEmbed().setColor(0x428BCA)
                                     .addField('오늘의 첫 퀘스트 완료!', `${user}가 경험치를 ${quest.table[solvedData.level]}+3000 얻었습니다.`)
                                     레벨.earnXP(gid, guild.uid[user], quest.table[solvedData.level]+3000)
                                     백준.guild[gid].quest.first_cleared.push(user)
                                     channel.send(embed)
                                 } else {
-                                    console.log(`${user}가 경험치를 ${quest.table[solvedData.level]}xp 얻었습니다.`)
                                     const embed = new RichEmbed().setColor(0x428BCA)
                                     .addField('퀘스트 완료!', `${user}가 경험치를 ${quest.table[solvedData.level]} 얻었습니다.`)
                                     레벨.earnXP(gid, guild.uid[user], quest.table[solvedData.level])
@@ -86,7 +78,11 @@ const checker = (gid) => {
 
                         // 실제 레벨업
                         guild.level[user] = userdata.level
-                        store.save(`벡준/${gid}`)
+                        store.save(`백준/${gid}`)
+
+                        if (bot.guilds[gid].enabled.includes("역할")) {
+                            bot.packages.역할.baekjoon(gid)
+                        }
                     }
                 })
             }

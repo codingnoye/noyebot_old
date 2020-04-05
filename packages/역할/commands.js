@@ -1,7 +1,6 @@
 const cmds = [
     require("./cmd/set.js"),
     require("./cmd/get.js"),
-    // require("./cmd/custom.js")
 ]
 
 const keywords = []

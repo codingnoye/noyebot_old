@@ -1,5 +1,6 @@
 const commands = require('./commands.js')
 const {RichEmbed} = require('discord.js')
+const baekjoon = require('./baekjoon.js')
 
 const cmds = {}
 for (const cmd in commands) {
@@ -29,6 +30,8 @@ const package = {
     },
 
     async onQuit () {},
+
+    baekjoon: baekjoon,
 
     guilds: {},
 

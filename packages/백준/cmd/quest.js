@@ -2,6 +2,7 @@ const {RichEmbed} = require('discord.js')
 const solved = require('../solved.js')
 const moment = require('moment')
 const crawler = require('../crawler.js')
+const comma = require('../../../lib/util').comma
 const table = [1000, 
     1000, 1200, 1400, 1600, 1800, 
     2000, 2400, 2800, 3200, 3600, 
@@ -46,9 +47,9 @@ const questMessage = async function(gid, channel) {
     .setTitle(`**${today}** 오늘의 퀘스트`)
     .setDescription("퀘스트 목록입니다.")
     for (const problem of solvedData) {
-        embed.addField(`**${problem.tier}**`, `**${problem.num}번 문제** ${table[problem.level]}XP\nhttps://www.acmicpc.net/problem/${problem.num}`)
+        embed.addField(`**${problem.tier}** ${problem.emoji}`, `**${problem.num}번 문제** ${comma(table[problem.level])}XP\nhttps://www.acmicpc.net/problem/${problem.num}`)
     }
-    embed.addField(`**추가 경험치**`, `오늘의 첫 퀘스트 클리어: 3000XP`)
+    embed.addField(`**추가 경험치**`, `오늘의 첫 퀘스트 클리어: 3,000XP`)
     embed.addField(`**문제 선정 조건**`, `실버 5 ~ 플레 1, 여기에 푼 사람이 없고 500명 이상 푼 문제 중 랜덤`)
 
     return await channel.send({embed})

@@ -21,7 +21,7 @@ module.exports = {
         for (const user of users) {
             const username = user[0]
             const userdata = user[1]
-            embed.addField(`${userdata.solved} 문제 (${ userdata.xp } xp)`, `**${ userdata.tier }**\n**${username}** ${msg.guild.members.get(guild.uid[username]).displayName}`)
+            embed.addField(`${userdata.solved} 문제 (${ userdata.xp } xp)`, `**${ userdata.tier }** ${userdata.emoji}\n**${username}** ${msg.guild.members.get(guild.uid[username]).displayName}`)
         }
         msg.channel.send({embed})
     },

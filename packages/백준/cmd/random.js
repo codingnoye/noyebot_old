@@ -77,5 +77,6 @@ module.exports = {
         }
     },
     keyword : 'random',
-    help : '자신이 원하는 난이도의 문제를 불러옵니다.'
+    help : '원하는 난이도의 문제 하나를 불러옵니다.',
+    args : 'b|s|g|p|d|r,b5|b4|...|r2|r1'
 }

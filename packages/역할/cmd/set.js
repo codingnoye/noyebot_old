@@ -103,5 +103,5 @@ module.exports = {
     func : main,
     keyword : "set",
     help : "(관리자) 해당 채널 내의 유저들의 역할을 조정합니다",
-    args : "userName +role/-role"
+    args : "userName +[role]|-[role]"
 }
