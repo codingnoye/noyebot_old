@@ -19,14 +19,13 @@ const package = {
     onMsg (msg) {},
 
     onCmd (msg, params) {
-        if (!msg.member.hasPermission('ADMINISTRATOR')) {
-            msg.channel.send(`이 명령어는 관리자 권한이 필요합니다.`)
-            return true
-        }
-        if (params[0] == 'role')
+        if (params[0] == 'role') {
+            if (!msg.member.hasPermission('ADMINISTRATOR')) {
+                msg.channel.send(`이 명령어는 관리자 권한이 필요합니다.`)
+                return true
+            }
             return commands.call(msg, params[1], params.slice(2))
-        else
-            return false
+        } else return false
     },
 
     async onQuit () {},
