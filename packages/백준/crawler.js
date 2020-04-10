@@ -1,18 +1,19 @@
 const rp = require('request-promise-native')
 const cheerio = require('cheerio')
 const _ = require('underscore')
+
 module.exports = {
-    async problem (problemId) {
+    async problem(problemId) {
         const data = await rp(`https://www.acmicpc.net/problem/${problemId}`)
         const $ = cheerio.load(data)
         const problem = {
             title: $('title').text(),
             users: $('td:nth-child(4)').text(),
-            users_percent: $('td:nth-child(6)').text()
+            users_percent: $('td:nth-child(6)').text(),
         }
         return problem
     },
-    async school (schoolId) {
+    async school(schoolId) {
         const data = await rp(`https://www.acmicpc.net/status?result_id=4&school_id=${schoolId}`)
         const $ = cheerio.load(data)
         const solutions = []
@@ -27,7 +28,7 @@ module.exports = {
         })
         return solutions
     },
-    async user (userId) {
+    async user(userId) {
         const data = await rp(`https://solved.ac/${userId}/solved`)
         const $ = cheerio.load(data)
         const problems = []
@@ -37,7 +38,7 @@ module.exports = {
         })
         return problems
     },
-    async quest (users, count=500, min='s5', max='p1', n='5') {
+    async quest(users, count = 500, min = 's5', max = 'p1', n = '5') {
         const temp = []
         for (const user of users) {
             temp.push(`solved_by%3A${user}`)
@@ -51,5 +52,5 @@ module.exports = {
             problems.push(problem)
         })
         return _.sample(problems, parseInt(n))
-    }
+    },
 }

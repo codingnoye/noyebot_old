@@ -8,7 +8,7 @@ const parser = (data) => {
             title: song.snippet.title,
             desc: song.snippet.description,
             channel: song.snippet.channelTitle,
-            url: 'https://www.youtube.com/watch?v='+song.id.videoId
+            url: 'https://www.youtube.com/watch?v=' + song.id.videoId,
         })
     }
     return res
@@ -21,8 +21,8 @@ youtube.addParam('type', 'video')
 const search = promisify(youtube.search)
 
 module.exports = {
-    async search (keyword) {
+    async search(keyword) {
         const songs = await search(keyword, 1)
         return parser(songs)[0]
-    }
+    },
 }

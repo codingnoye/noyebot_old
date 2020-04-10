@@ -1,15 +1,15 @@
-const Discord = require("discord.js")
+const Discord = require('discord.js')
 const client = new Discord.Client()
 const debug = require('./lib/debug.js')
-const config = require("./data/config.js")
-const store = require("./src/store.js")
+const config = require('./data/config.js')
+const store = require('./src/store.js')
 const events = require('./src/events.js')
 const packages = require('./src/packages.js')
 
 const bot = {
     guilds: {},
     packages: {},
-    config: config
+    config: config,
 }
 
 global.bot = bot
@@ -23,15 +23,15 @@ const main = async () => {
     packages.loadAll()
 
     // 메시지 왔을 때 처리
-    client.on("message", events.onMsg)
+    client.on('message', events.onMsg)
 
     // 봇 상태 표시
     client.user.setStatus('online')
     client.user.setPresence({
         game: {
             name: `${bot.config.defaultPrefix}help　 　 　 　 　 　 　 　 　 　 .`,
-            type: "Playing"
-        }
+            type: 'Playing',
+        },
     })
 }
 
@@ -42,8 +42,8 @@ process.on('SIGINT', events.onKill)
 process.on('unhandledRejection', events.onPromiseError)
 
 // ready 시 작업
-client.on("ready", () => {
-    debug.log("서버 시작", debug.level.imp)
+client.on('ready', () => {
+    debug.log('서버 시작', debug.level.imp)
     bot.client = client
     main()
 })

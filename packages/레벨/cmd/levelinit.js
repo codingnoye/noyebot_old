@@ -1,5 +1,5 @@
 module.exports = {
-    func : (msg, params) => {
+    func: (msg, params) => {
         if (!msg.member.hasPermission('ADMINISTRATOR')) {
             msg.channel.send(`이 명령어는 관리자 권한이 필요합니다.`)
             return
@@ -11,6 +11,6 @@ module.exports = {
         store.save(`레벨/${gid}`)
         msg.channel.send(`이 채널을 알림 채널로 설정합니다.`)
     },
-    keyword : 'levelinit',
-    help : '(관리자) 해당 채널을 레벨 알림 채널로 설정합니다.'
+    keyword: 'levelinit',
+    help: '(관리자) 해당 채널을 레벨 알림 채널로 설정합니다.',
 }

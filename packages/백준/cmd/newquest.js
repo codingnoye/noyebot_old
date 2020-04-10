@@ -1,7 +1,8 @@
 const quest = require('./quest.js')
+
 module.exports = {
-    keyword : 'newquest',
-    func : async (msg, params) => {
+    keyword: 'newquest',
+    func: async (msg, params) => {
         if (!msg.member.hasPermission('ADMINISTRATOR')) {
             msg.channel.send(`이 명령어는 관리자 권한이 필요합니다.`)
             return
@@ -15,5 +16,5 @@ module.exports = {
         await quest.newQuest(gid)
         await quest.questMessage(gid, msg.channel)
     },
-    help : '(관리자) 오늘의 퀘스트를 새로 생성합니다.'
+    help: '(관리자) 오늘의 퀘스트를 새로 생성합니다.',
 }
