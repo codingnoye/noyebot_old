@@ -1,5 +1,5 @@
 module.exports = {
-    getMemberTable : (channel) => {
+    getMemberTable: (channel) => {
         const mInfos = channel.members
         const result = {}
 
@@ -9,9 +9,9 @@ module.exports = {
 
         return result // name : id
     },
-    getMemberId : (target, channel) => {
+    getMemberId: (target, channel) => {
         const mInfos = channel.members
-        let result = ""
+        let result = ''
 
         for (let [id, mInfo] of mInfos) {
             if (target == mInfo.displayName) {
@@ -21,20 +21,20 @@ module.exports = {
 
         return result // id
     },
-    getRoleTable : (gInfo) => {
+    getRoleTable: (gInfo) => {
         const rInfos = gInfo.roles
         const result = {}
 
         for (let [id, rInfo] of rInfos) {
-            if (rInfo.name == "@everyone") continue
+            if (rInfo.name == '@everyone') continue
             result[id] = rInfo.name
         }
 
         return result // name : id
     },
-    getRoleId : (target, gInfo) => {
+    getRoleId: (target, gInfo) => {
         const rInfos = gInfo.roles
-        let result = ""
+        let result = ''
 
         for (let [id, rInfo] of rInfos) {
             if (target == rInfo.name) {
@@ -43,5 +43,5 @@ module.exports = {
         }
 
         return result // id
-    }
+    },
 }

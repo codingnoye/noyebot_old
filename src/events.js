@@ -1,6 +1,5 @@
 const events = {
     async onMsg(msg) {
-
         // 봇의 메시지는 무시
         if (msg.author.bot) return
 
@@ -34,12 +33,12 @@ const events = {
                 bot.packages[packageName].onGuildLoad(gid)
             }
         }
-        
+
         const prefix = bot.guilds[gid].prefix
 
         // 메시지 전달
         if (msg.content.startsWith(prefix)) {
-            const params = msg.content.replace(prefix, '').split(" ")
+            const params = msg.content.replace(prefix, '').split(' ')
             let worked = false
             // 명령어의 경우 적용된 패키지들의 onCmd로 전달
             for (const packageName of bot.guilds[gid].enabled)
@@ -53,7 +52,7 @@ const events = {
             }
         }
     },
-    async onKill () {
+    async onKill() {
         debug.log('\n종료 작업 중...', debug.level.imp)
         const promises = []
         for (const packageName in bot.packages) promises.push(bot.packages[packageName].onQuit())
@@ -62,10 +61,10 @@ const events = {
         client.destroy()
         process.exit()
     },
-    onPromiseError (reason, p) {
-        console.log('Promise 에러: ', p);
+    onPromiseError(reason, p) {
+        console.log('Promise 에러: ', p)
         console.log(reason)
-    }
+    },
 }
 
 module.exports = events

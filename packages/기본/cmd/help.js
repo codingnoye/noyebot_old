@@ -1,10 +1,12 @@
 const {RichEmbed} = require('discord.js')
+
 module.exports = {
-    func : (msg, params)=>{
+    func: (msg, params) => {
         const gid = msg.guild.id
         if (params.length == 0) {
-            const embed = new RichEmbed().setColor(0x428BCA)
-            .setTitle(`${bot.config.botname} 전체 도움말`)
+            const embed = new RichEmbed()
+                .setColor(0x428bca)
+                .setTitle(`${bot.config.botname} 전체 도움말`)
             for (const packageName of bot.guilds[gid].enabled) {
                 const package = bot.packages[packageName]
                 package.helpSimple(msg, embed)
@@ -18,9 +20,8 @@ module.exports = {
                 msg.channel.send(`${params[0]} 패키지를 찾을 수 없습니다.`)
             }
         }
-        
     },
-    keyword : 'help',
-    help : '도움말을 확인합니다.',
-    args : '?packageName'
+    keyword: 'help',
+    help: '도움말을 확인합니다.',
+    args: '?packageName',
 }

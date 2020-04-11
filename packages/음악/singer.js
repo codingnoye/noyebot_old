@@ -2,9 +2,10 @@ const ytdl = require('ytdl-core')
 const sing = async (gid, channel) => {
     const music = bot.packages['음악']
     const guild = music.guilds[gid]
-    if (!guild.connection)
-        guild.connection = await channel.join()
-    guild.control = guild.connection.playStream(ytdl(guild.queue[0].url, { quality: 'highestaudio', filter: 'audioonly' }))
+    if (!guild.connection) guild.connection = await channel.join()
+    guild.control = guild.connection.playStream(
+        ytdl(guild.queue[0].url, {quality: 'highestaudio', filter: 'audioonly'})
+    )
     guild.control.setVolumeLogarithmic(guild.volume)
 }
 const join = async (msg, gid) => {
@@ -40,7 +41,9 @@ const play = async (gid) => {
         if (guild.queue.length > 1) {
             if (guild.playing) {
                 guild.queue.shift()
-                guild.textChannel.send(`${guild.queue[0].channel}의 **${guild.queue[0].title}** 들려드릴게요.`)
+                guild.textChannel.send(
+                    `${guild.queue[0].channel}의 **${guild.queue[0].title}** 들려드릴게요.`
+                )
                 play(gid)
             }
         } else {
@@ -56,5 +59,5 @@ const play = async (gid) => {
 module.exports = {
     sing: sing,
     join: join,
-    play: play
+    play: play,
 }

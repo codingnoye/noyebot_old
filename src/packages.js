@@ -1,6 +1,7 @@
 const fs = require('fs')
+
 module.exports = {
-    load (packageName) {
+    load(packageName) {
         const package = require('../packages/' + packageName + '/main.js')
         package.name = packageName
         package.onLoad()
@@ -11,5 +12,5 @@ module.exports = {
         for (const packageName of packageNames) {
             this.load(packageName)
         }
-    }
+    },
 }

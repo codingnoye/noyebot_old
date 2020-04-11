@@ -7,7 +7,7 @@ const cmds = [
     require('./cmd/재생목록.js'),
     require('./cmd/다음곡.js'),
     require('./cmd/볼륨.js'),
-    require('./cmd/반복.js')
+    require('./cmd/반복.js'),
 ]
 const keywords = []
 const func = {}
@@ -18,12 +18,12 @@ for (const cmd of cmds) {
     func[cmd.keyword] = cmd.func
     help[cmd.keyword] = {
         desc: cmd.help,
-        args: cmd.args
+        args: cmd.args,
     }
 }
 
 const commands = {
-    call (msg, keyword, payload) {
+    call(msg, keyword, payload) {
         if (keywords.includes(keyword)) {
             bot.packages.음악.guilds[msg.guild.id].textChannel = msg.channel
             func[keyword](msg, payload)
@@ -34,6 +34,7 @@ const commands = {
     },
     keywords: keywords,
     func: func,
-    help: help
+    help: help,
 }
+
 module.exports = commands

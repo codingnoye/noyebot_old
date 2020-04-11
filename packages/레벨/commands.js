@@ -1,8 +1,4 @@
-const cmds = [
-    require('./cmd/levelinit.js'),
-    require('./cmd/level.js'),
-    require('./cmd/mylevel.js')
-]
+const cmds = [require('./cmd/levelinit.js'), require('./cmd/level.js'), require('./cmd/mylevel.js')]
 
 const keywords = []
 const func = {}
@@ -13,12 +9,12 @@ for (const cmd of cmds) {
     func[cmd.keyword] = cmd.func
     help[cmd.keyword] = {
         desc: cmd.help,
-        args: cmd.args
+        args: cmd.args,
     }
 }
 
 const commands = {
-    call (msg, keyword, payload) {
+    call(msg, keyword, payload) {
         if (keywords.includes(keyword)) {
             func[keyword](msg, payload)
             return true
@@ -28,6 +24,7 @@ const commands = {
     },
     keywords: keywords,
     func: func,
-    help: help
+    help: help,
 }
+
 module.exports = commands
