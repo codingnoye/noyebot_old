@@ -8,8 +8,8 @@ module.exports = {
         const $ = cheerio.load(data)
         const problem = {
             title: $('title').text(),
-            users: $('td:nth-child(4)').text(),
-            users_percent: $('td:nth-child(6)').text(),
+            users: $('#problem-info td:nth-child(4)').text(),
+            users_percent: $('#problem-info td:nth-child(6)').text()
         }
         return problem
     },

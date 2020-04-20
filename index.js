@@ -42,7 +42,7 @@ process.on('SIGINT', events.onKill)
 process.on('unhandledRejection', events.onPromiseError)
 
 // ready 시 작업
-client.on('ready', () => {
+client.once('ready', () => {
     debug.log('서버 시작', debug.level.imp)
     bot.client = client
     main()
