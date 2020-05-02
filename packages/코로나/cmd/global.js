@@ -12,12 +12,12 @@ const global = (msg) => {
             const $ = cheerio.load(body)
             let globalRegions = {}
 
-            $('.mgt8 table.num tbody tr').each((i, ele) => {
-                if (i <= 5) {
+            $('.data_table.mgt8 .num tbody').first().children('tr').each((i, ele) => {
+                if (i % 2 != 0) {
                     globalRegions[$(ele).children('th').text().trim()] = {
                         감염자: $(ele).children('td:nth-child(2)').text().trim(),
-                        사망자: $(ele).children('td:nth-child(3)').text().trim(),
-                        사망률: $(ele).children('td:nth-child(4)').text().trim(),
+                        사망자: $(ele).children('td:nth-child(4)').text().trim(),
+                        사망률: $(ele).children('td:nth-child(6)').text().trim(),
                     }
                 }
             })
